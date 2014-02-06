@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 public interface SaleTerminal {
     
-    void scan(String itemCode);
+    void scan(String itemCode) throws ItemNotFoundException;
     
     void setPricing(Map<String, Item> priceCatalog);
     

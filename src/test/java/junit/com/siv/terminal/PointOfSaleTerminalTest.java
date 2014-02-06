@@ -9,10 +9,10 @@ import com.siv.terminal.Discount;
 import com.siv.terminal.Item;
 import com.siv.terminal.PointOfSaleTerminal;
 import com.siv.terminal.TerminalView;
+import com.siv.terminal.ItemNotFoundException;
 
 import java.util.Map;
 import java.util.HashMap;
-import java.util.NoSuchElementException;
 import java.math.BigDecimal;
 
 public class PointOfSaleTerminalTest {
@@ -43,39 +43,45 @@ public class PointOfSaleTerminalTest {
         testTerminal.clear();
     }
     
-    @Test(expected = NoSuchElementException.class)
-    public void testScanNotContainsCode() {
+    @Test(expected = ItemNotFoundException.class)
+    public void testScanNotContainsCode() throws ItemNotFoundException {
         testTerminal.scan("Z");
     }
     
     public void testScan1() {
         testTerminal.clear();
-        testTerminal.scan("A");
-        testTerminal.scan("B");
-        testTerminal.scan("C");
-        testTerminal.scan("D");
-        testTerminal.scan("A");
-        testTerminal.scan("B");
-        testTerminal.scan("A");
+        try {
+            testTerminal.scan("A");
+            testTerminal.scan("B");
+            testTerminal.scan("C");
+            testTerminal.scan("D");
+            testTerminal.scan("A");
+            testTerminal.scan("B");
+            testTerminal.scan("A");
+        } catch (ItemNotFoundException e) {}
     }
     
     public void testScan2() {
         testTerminal.clear();
-        testTerminal.scan("C");
-        testTerminal.scan("C");
-        testTerminal.scan("C");
-        testTerminal.scan("C");
-        testTerminal.scan("C");
-        testTerminal.scan("C");
-        testTerminal.scan("C");
+        try {
+            testTerminal.scan("C");
+            testTerminal.scan("C");
+            testTerminal.scan("C");
+            testTerminal.scan("C");
+            testTerminal.scan("C");
+            testTerminal.scan("C");
+            testTerminal.scan("C");
+        } catch (ItemNotFoundException e) {}
     }
     
     public void testScan3() {
         testTerminal.clear();
-        testTerminal.scan("A");
-        testTerminal.scan("B");
-        testTerminal.scan("C");
-        testTerminal.scan("D");
+        try {
+            testTerminal.scan("A");
+            testTerminal.scan("B");
+            testTerminal.scan("C");
+            testTerminal.scan("D");
+        } catch (ItemNotFoundException e) {}
     }
     
     @Test

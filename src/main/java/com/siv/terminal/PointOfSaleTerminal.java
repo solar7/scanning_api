@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.NoSuchElementException;
 import java.math.BigDecimal;
 
 public class PointOfSaleTerminal implements SaleTerminal {
@@ -27,12 +26,12 @@ public class PointOfSaleTerminal implements SaleTerminal {
         return itemsInCart;
     }
  
-    public void scan(String itemCode) {
+    public void scan(String itemCode) throws ItemNotFoundException {
         Item item = catalog.get(itemCode);
         if (item != null) {
             itemsInCart.add(item);
         } else {
-            throw new NoSuchElementException("Item with code '" +
+            throw new ItemNotFoundException("Item with code '" +
                     itemCode + "' hasn't been found in Catalog");
         }
     }
