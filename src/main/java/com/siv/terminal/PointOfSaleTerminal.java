@@ -1,7 +1,5 @@
 package com.siv.terminal;
 
-import java.util.Map;
-import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Set;
@@ -9,25 +7,25 @@ import java.util.HashSet;
 import java.math.BigDecimal;
 
 public class PointOfSaleTerminal implements SaleTerminal {
+
+    private Catalog catalog;
     
     private List<Item> itemsInCart = new LinkedList<Item>();
     
-    private Map<String, Item> catalog = new HashMap<String, Item>();
-
-    public void setPricing(Map<String, Item> catalog) {
+    public void setPricing(Catalog catalog) {
         this.catalog = catalog;
-    }
-
-    public void clear() {
-        itemsInCart.clear();
     }
     
     public List<Item> getItems() {
         return itemsInCart;
     }
+
+    public void clear() {
+        itemsInCart.clear();
+    }
  
     public void scan(String itemCode) throws ItemNotFoundException {
-        Item item = catalog.get(itemCode);
+        Item item = catalog.getItem(itemCode);
         if (item != null) {
             itemsInCart.add(item);
         } else {

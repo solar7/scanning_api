@@ -5,14 +5,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import static org.junit.Assert.*;
 
-import com.siv.terminal.Discount;
 import com.siv.terminal.Item;
+import com.siv.terminal.Catalog;
+import com.siv.terminal.Discount;
 import com.siv.terminal.PointOfSaleTerminal;
 import com.siv.terminal.TerminalView;
 import com.siv.terminal.ItemNotFoundException;
 
-import java.util.Map;
-import java.util.HashMap;
 import java.math.BigDecimal;
 
 public class PointOfSaleTerminalTest {
@@ -23,18 +22,12 @@ public class PointOfSaleTerminalTest {
     
     @BeforeClass
     public static void initPriceCatalog() {
-        Item itemA = new Item("A", new BigDecimal(1.25), new Discount(3, new BigDecimal(3)));
-        Item itemB = new Item("B", new BigDecimal(4.25));
-        Item itemC = new Item("C", new BigDecimal(1), new Discount(6, new BigDecimal(5)));
-        Item itemD = new Item("D", new BigDecimal(0.75));
-        
-        Map<String, Item> priceCatalog = new HashMap<String, Item>();
-        priceCatalog.put(itemA.getProductCode(), itemA);
-        priceCatalog.put(itemB.getProductCode(), itemB);
-        priceCatalog.put(itemC.getProductCode(), itemC);
-        priceCatalog.put(itemD.getProductCode(), itemD);
-        
-        testTerminal.setPricing(priceCatalog);
+        Catalog catalog = new Catalog();
+        catalog.putItem(new Item("A", new BigDecimal(1.25), new Discount(3, new BigDecimal(3))));
+        catalog.putItem(new Item("B", new BigDecimal(4.25)));
+        catalog.putItem(new Item("C", new BigDecimal(1), new Discount(6, new BigDecimal(5))));
+        catalog.putItem(new Item("D", new BigDecimal(0.75)));
+        testTerminal.setPricing(catalog);
     }
     
     @Before
@@ -58,7 +51,9 @@ public class PointOfSaleTerminalTest {
             testTerminal.scan("A");
             testTerminal.scan("B");
             testTerminal.scan("A");
-        } catch (ItemNotFoundException e) {}
+        } catch (ItemNotFoundException e) {
+            //ignore
+        }
     }
     
     public void testScan2() {
@@ -71,7 +66,9 @@ public class PointOfSaleTerminalTest {
             testTerminal.scan("C");
             testTerminal.scan("C");
             testTerminal.scan("C");
-        } catch (ItemNotFoundException e) {}
+        } catch (ItemNotFoundException e) {
+            //ignore
+        }
     }
     
     public void testScan3() {
@@ -81,7 +78,9 @@ public class PointOfSaleTerminalTest {
             testTerminal.scan("B");
             testTerminal.scan("C");
             testTerminal.scan("D");
-        } catch (ItemNotFoundException e) {}
+        } catch (ItemNotFoundException e) {
+            //ignore
+        }
     }
     
     @Test

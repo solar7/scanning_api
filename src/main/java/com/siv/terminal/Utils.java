@@ -3,11 +3,7 @@ package com.siv.terminal;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Utils {
-    
-    private Utils() {
-        //utility class
-    }
+public abstract class Utils {
     
     private interface IPredicate<T> {
         boolean apply(T item);
