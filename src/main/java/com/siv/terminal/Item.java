@@ -34,10 +34,6 @@ public class Item {
         return productCode;
     }
 
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
